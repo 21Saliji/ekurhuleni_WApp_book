@@ -43,6 +43,8 @@ Set up a virtual environment to manage dependencies:
 Install the necessary packages using the `requirements.txt` file:
 
 ```bash
+pip freeze > requirements.txt
+
 pip install -r requirements.txt
 ```
 
@@ -61,10 +63,10 @@ To obtain your Vonage API key and secret, sign up or log in to the Vonage API Da
 
 ### 5. Run the Script
 
-Once everything is set up, you can run the `send_whatsapp.py` script:
+Once everything is set up, you can run the `my-whatsapp-bot.py` script:
 
 ```bash
-python send_whatsapp.py  # Or use `python3` if necessary
+python my-whatsapp-bot.py  # Or use `python3` if necessary
 ```
 
 ## Troubleshooting
