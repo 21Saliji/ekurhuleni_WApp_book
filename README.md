@@ -29,8 +29,8 @@ The Ekurhuleni Smart Bot is a Flask-based application that interacts with users 
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/ekurhuleni-smart-bot.git
-   cd ekurhuleni-smart-bot
+   git clone https://github.com/21Saliji/ekurhuleni_WApp_book.git
+   cd ekurhuleni_WApp_book
    ```
 
 2. **Create and activate a virtual environment:**
