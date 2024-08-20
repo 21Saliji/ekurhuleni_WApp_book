@@ -1,75 +1,113 @@
-```markdown
-# Ekurhuleni WhatsApp Booking System
+# Ekurhuleni Smart Bot README
+
+Welcome to the Ekurhuleni Smart Bot project! This bot helps users book venues and manage their bookings via SMS, integrating with Google Calendar for event management. Below is a guide to set up, run, and understand the bot.
 
 ## Overview
-This project integrates Vonage's API to send WhatsApp messages. Follow the steps below to set up and run the project.
 
-## Prerequisites
+The Ekurhuleni Smart Bot is a Flask-based application that interacts with users through Twilio SMS. It uses spaCy for natural language processing and integrates with Google Calendar to manage venue bookings. The bot supports multiple languages and provides an intuitive booking experience.
 
-1. **Python 3.x:** Ensure Python 3 is installed on your system. You can download it from [python.org](https://www.python.org/downloads/).
-2. **Git:** Make sure Git is installed for version control. You can download it from [git-scm.com](https://git-scm.com/downloads).
+## Features
 
-## Setup Instructions
+- **Language Support:** English, IsiZulu, Sesotho
+- **Region Selection:** Duduza, Tsakane, KwaThema
+- **Venue Booking:** Book various venues in the selected region
+- **Google Calendar Integration:** Creates events on Google Calendar for confirmed bookings
+- **Rate Limiting:** Prevents abuse by limiting requests
 
-### 1. Clone the Repository
+## Requirements
 
-First, clone the repository to your local machine:
+- Python 3.6 or higher
+- Flask
+- spaCy
+- Twilio
+- Flask-Limiter
+- python-dotenv
+- Google API client libraries
 
-```bash
-git clone https://github.com/21Saliji/ekurhuleni_WApp_book.git
-cd ekurhuleni_WApp_book
-```
+## Installation
 
-### 2. Create and Activate a Virtual Environment
+1. **Clone the repository:**
 
-Set up a virtual environment to manage dependencies:
+   ```bash
+   git clone https://github.com/yourusername/ekurhuleni-smart-bot.git
+   cd ekurhuleni-smart-bot
+   ```
 
-- **On Windows:**
+2. **Create and activate a virtual environment:**
 
-  ```bash
-  python -m venv venv
-  venv\Scripts\activate
-  ```
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-- **On macOS/Linux:**
+3. **Install the required packages:**
 
-  ```bash
-  python3 -m venv venv
-  source venv/bin/activate
-  ```
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-### 3. Install Required Packages
+4. **Set up environment variables:**
 
-Install the necessary packages using the `requirements.txt` file:
+   Create a `.env` file in the root directory and add the following variables:
 
-```bash
-pip install -r requirements.txt
-```
+   ```plaintext
+   GOOGLE_CLIENT_ID=<your-google-client-id>
+   GOOGLE_CLIENT_SECRET=<your-google-client-secret>
+   TWILIO_ACCOUNT_SID=<your-twilio-account-sid>
+   TWILIO_AUTH_TOKEN=<your-twilio-auth-token>
+   TWILIO_PHONE_NUMBER=<your-twilio-phone-number>
+   ```
 
-### 4. Configure Environment Variables
+5. **Download and install spaCy language model:**
 
-Create a `.env` file in the root directory of the project with the following content:
+   ```bash
+   python -m spacy download en_core_web_sm
+   ```
 
-```plaintext
-VONAGE_API_KEY=your_api_key
-VONAGE_API_SECRET=your_api_secret
-```
+6. **Set up Google API credentials:**
 
-Replace `your_api_key` and `your_api_secret` with your actual Vonage API key and secret. 
+   - Create a project in the Google Developers Console.
+   - Enable the Google Calendar API.
+   - Download the `credentials.json` file and place it in the `.credentials` directory.
 
-To obtain your Vonage API key and secret, sign up or log in to the Vonage API Dashboard[https://www.vonage.com/communications-apis/].
+## Running the Application
 
-### 5. Run the Script
+1. **Start the Flask server:**
 
-Once everything is set up, you can run the `send_whatsapp.py` script:
+   ```bash
+   python chantel.py
+   ```
 
-```bash
-python send_whatsapp.py  # Or use `python3` if necessary
-```
+2. **Set up a webhook in Twilio:**
 
-## Troubleshooting
+   Configure Twilio to send incoming SMS messages to `http://your-server-url/webhook`.
 
-- **Missing Packages:** Ensure all required packages are listed in `requirements.txt` and installed in your virtual environment.
-- **Environment Variables:** Verify that the `.env` file is correctly set up with the correct API key and secret.
-- **Script Errors:** Review any error messages in the terminal to identify and fix issues. Common issues might include typos or configuration problems.
+## Code Explanation
 
+- **Google Calendar Integration:**
+  - `initialize_google_calendar()`: Sets up the Google Calendar API client.
+  - `create_event()`: Creates an event on Google Calendar.
+
+- **spaCy Integration:**
+  - `analyze_message()`: Analyzes user messages to extract details.
+
+- **Flask Routes:**
+  - `/webhook`: Handles incoming SMS messages, guides the user through the booking process, and creates calendar events.
+
+- **Rate Limiting:**
+  - Prevents abuse by limiting requests to 50 per minute.
+
+## Contributing
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Commit your changes (`git commit -am 'Add new feature'`).
+4. Push to the branch (`git push origin feature-branch`).
+5. Create a new Pull Request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+
+Happy coding! 🎉
